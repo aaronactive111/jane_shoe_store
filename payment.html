@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Jane's Shoe Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Payment</h1>
+    </header>
+    <main>
+        <form action="process_payment.php" method="POST">
+            <input type="hidden" name="delivery_method" value="">
+
+            <label for="name">Name on Card:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="card-number">Card Number:</label>
+            <input type="number" id="card-number" name="card_number" required>
+
+            <label for="expiry">Expiry Date (MM/YY):</label>
+            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+
+            <label for="cvv">CVV:</label>
+            <input type="number" id="cvv" name="cvv" required>
+
+            <label for="billing-address">Billing Address:</label>
+            <input type="text" id="billing-address" name="billing_address" required>
+
+            <button type="submit">Complete Payment</button>
+        </form>
+    </main>
+    <script>
+        // Capture delivery method and pass it to the payment form
+        document.querySelector('form').onsubmit = function() {
+            const deliveryMethod = document.querySelector('input[name="delivery"]:checked');
+            if (deliveryMethod) {
+                this.querySelector('input[name="delivery_method"]').value = deliveryMethod.value;
+            }
+        }
+    </script>
+</body>
+</html>

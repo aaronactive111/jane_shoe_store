@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Jane's Shoe Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Order Confirmation</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="products.html">Continue Shopping</a></li>
+            <li><a href="logout.html">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Thank you for your order!</h2>
+        <p>Your order has been confirmed. We will send you a confirmation email shortly.</p>
+        <h3>Order Summary</h3>
+        
+        <p>Order ID: #<?php echo htmlspecialchars($orderId); ?></p> <!-- Display the order ID -->
+        <p>Total Amount: $<?php echo htmlspecialchars(number_format($totalAmount, 2)); ?></p> <!-- Display total amount -->
+    </div>
+    <footer>
+        <p>&copy; 2024 Jane's Shoe Store</p>
+    </footer>
+</body>
+</html>

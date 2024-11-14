@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Jane's Shoe Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .slideshow-container {
+            position: relative;
+            max-width: 600px; /* Set max width for the slideshow */
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: none;
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .active {
+            display: block;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Jane's Shoe Store</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="products.html">Shop</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="custom_order.html">Custom Order</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Featured Products</h2>
+        <p>Discover our unique collection of custom shoes!</p>
+
+        <div class="slideshow-container">
+            <div class="slides active">
+                <img src="images/nike cactus.PNG" alt="Nike Cactus" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images/nike x alxis sablone.PNG" alt="nike x alxis sablone" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images/our legacy.PNG" alt="Our Legacy" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images\natasha zinko.PNG" alt="Natasha Zinko" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images\nike jordans.PNG" alt="Nike Jordans" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images\versace.PNG" alt="Versace" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images\Suicoke.PNG" alt="Suicoke" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images/Maison.PNG" alt="Maison" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images/Ferragamo.PNG" alt="Ferragamo" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images/chloe2.PNG" alt="chloe2" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+            <div class="slides">
+                <img src="images/Siletto D&G.PNG" alt="Siletto D&G" style="width:100%; max-height: 500px; object-fit: cover;">
+            </div>
+           
+
+           
+
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Jane's Shoe Store</p>
+    </footer>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("slides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex - 1].style.display = "block";  
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+
+        function changeSlide(n) {
+            slideIndex += n - 1; // Adjust the index based on the direction
+            showSlides();
+        }
+    </script>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/673333d34304e3196ae0cd1a/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+</html>

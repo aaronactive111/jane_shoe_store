@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Jane's Shoe Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Jane's Shoe Store</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="checkout.html" id="checkout-button" style="display:none;">Proceed to Checkout</a></li>
+        </ul>
+    </nav>
+    <div class="container" id="product-list">
+        <h2>Products</h2>
+        <!-- Products will be dynamically loaded here -->
+    </div>
+    <footer>
+        <p>&copy; 2024 Jane's Shoe Store</p>
+    </footer>
+
+    <script>
+        // Function to load products
+        function loadProducts() {
+            fetch('products.php?ajax=true')
+            .then(response => response.json())
+            .then(products => {
+                const productList = document.getElementById('product-list');
+                productList.innerHTML = ''; // Clear existing products
+                products.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'product';
+                    productDiv.innerHTML = `
+                        <h3>${product.name}</h3>
+                        <p>Price: GHC${product.price}</p>
+                        <img src="${product.image_url}" alt="${product.name}" style="max-width: 200px; height: auto;" />
+                        <button onclick="addToCart('${product.id}', '${product.name}', ${product.price})">Add to Cart</button>
+                    `;
+                    productList.appendChild(productDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching products:', error));
+        }
+
+        // Function to add item to cart
+        function addToCart(id, name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += 1; // Increment quantity
+            } else {
+                cart.push({ id, name, price, quantity: 1 }); // Add new item
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Show the proceed to checkout button
+            document.getElementById('checkout-button').style.display = 'inline';
+
+            // Alert message (optional)
+            alert("Item added to cart. You can now proceed to checkout.");
+        }
+        
+        // Call loadProducts when the page loads
+        window.onload = loadProducts;
+    </script>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/673333d34304e3196ae0cd1a/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+</html>

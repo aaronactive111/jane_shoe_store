@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #8fc522;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Sales Report</h2>
+    <p>Total Sales (Last Month): GHC<span id="total-sales">55000.00</span></p>
+    <p>Total Orders (Last Month): <span id="total-orders">200</span></p>
+
+    <h3>Detailed Sales by Product</h3>
+    <table id="product-sales-table">
+        <tr>
+            <th>Product</th>
+            <th>Stock Level</th>
+            <th>Total Sold</th>
+            <th>Total Sales</th>
+        </tr>
+        <!-- Sample rows - these can be dynamically generated or replaced with real data -->
+        <tr>
+            <td>LOUBOUTIN</td>
+            <td>50</td>
+            <td>20</td>
+            <td>GHC120000.00</td>
+        </tr>
+        <tr>
+            <td>Moon Boots</td>
+            <td>30</td>
+            <td>15</td>
+            <td>GHC30000.00</td>
+        </tr>
+    </table>
+
+    <a href="admin.html" class="button">Back to Dashboard</a>
+</div>
+
+<script>
+    // Function to fetch the latest sales data
+    function fetchSalesData() {
+        fetch('fetch_sales_data.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error:', data.error);
+                } else {
+                    // Update the total sales and total orders
+                    document.getElementById('total-sales').textContent = parseFloat(data.total_sales).toFixed(2);
+                    document.getElementById('total-orders').textContent = data.total_orders;
+
+                    // Update product details in the table
+                    const productTable = document.getElementById('product-sales-table');
+                    
+                    // Clear existing rows (except header)
+                    productTable.querySelectorAll('tr:not(:first-child)').forEach(row => row.remove());
+
+                    // Insert new rows for each product
+                    data.products.forEach(product => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${product.name}</td>
+                            <td>${product.stock}</td>
+                            <td>${product.total_sold}</td>
+                            <td>GHC${parseFloat(product.total_sales).toFixed(2)}</td>
+                        `;
+                        productTable.appendChild(row);
+                    });
+                }
+            })
+            .catch(error => console.error('Error fetching sales data:', error));
+    }
+
+    // Fetch sales data every 30 seconds
+    setInterval(fetchSalesData, 30000);
+
+    // Initial fetch when the page loads
+    fetchSalesData();
+</script>
+
+</body>
+</html>
